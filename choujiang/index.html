@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" id="viewport" />
+	    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	    <meta http-equiv="Pragma" content="no-cache" />
+	    <meta http-equiv="Expires" content="0" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">	
+		<title>欧气抽奖</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html{
+				font-size: 120px;
+			}			
+			.main_page{
+				position: relative;
+				max-width: 768px;
+				margin: auto;
+				font-size: 0.2rem;
+			}
+			.main_bg{
+				width: 100%;
+				display: block;
+			}		
+			.top_left{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.view {
+				position: relative;
+			}
+			.cant_view{
+				display: none;
+			}
+			.top_left .div1{
+				display: block;
+				position: absolute;
+				width: 1.6rem;
+				height: 2.5rem;
+				text-align: center;
+			}
+			.top_left .div1 img{
+				width: 100%;
+				height: 100%;
+			}
+			.top_left .point{
+				position: absolute;
+				color: white;
+				top: 0.4rem;
+				width: 100%;
+			}
+			.top_left .point span{
+				position: relative;
+				top: 0.1rem;				
+			}
+			.top_left .point p{
+				transform: scale(0.8);
+				text-align: center;
+				line-height: 0.25rem;	
+			}
+			.top_left .Bitmap{
+				top: 0.9rem;
+				left:0;
+				right: 0;
+				margin: 0 auto;
+				position: absolute;
+				width: 65%;				
+			}
+			.huxi_animation{
+				animation-name: ani;
+				animation-duration: 2s;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;				
+			}
+			@keyframes ani{
+				0%{transform: scale(1);}
+				50%{transform: scale(1.1);}
+				100%{transform: scale(1);}
+			}			
+			.top_left .get_point{
+				width: 0.8rem;
+				height: 0.8rem;
+				top: 1.55rem;
+				left: 0.35rem;
+				position: absolute;
+			}
+			.rule_img{
+				display: block;
+				position: absolute;
+				right: 0;
+				top: 3.872rem;
+				width: 1.3rem;
+			}
+			.rule_img img{
+				width: 100%;
+			}				
+			.loop_img{
+				width: 6rem;
+				height: 2.5rem;
+				position: absolute;
+				top: 4.5rem;
+				width: 100%;
+				height: 2.5rem;
+				margin: auto;
+				z-index: 0;		
+				overflow: hidden;		
+			}
+			.swiper-container {
+				height: 100%;
+				width: 100%;
+				position: absolute;
+			}
+			.swiper-wrapper {
+				width: 100%;
+				height: 100%;
+			}
+			.swiper-slide {
+				float: left;
+			}
+			.swiper-slide img {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				width: 2.25rem;
+			}
+
+			.looping_bingo{
+				position: absolute;
+				top: 7.85rem;
+				display: block;
+				width: 100%;
+				height: 0.35rem;
+				text-align: center;
+				overflow: hidden;
+				color: white;
+				line-height: 0.4rem;
+			}
+			.looping_bingo .div1{
+				animation-name: word;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+			}			
+			.looping_bingo .div1 p{
+				height: 0.4rem;
+			}
+			.lottery{
+				display: block;
+				position: absolute;
+				top: 10.25rem;
+				left: 0;
+				right: 0;
+				height: 3.5rem;
+				width: 5rem;
+				margin: auto;
+			}
+			.lottery .point_30{
+				left: 0.14rem;
+				position: absolute;
+				top: 0.1rem;
+				width: 1.15rem;
+				height: 1.1rem;
+			}
+			.lottery .point_100{
+				left: 1.95rem;
+				position: absolute;
+				top: 0.1rem;
+				width: 1.15rem;
+				height: 1.1rem;				
+
+			}
+			.lottery .point_400{
+				right:  0.14rem;
+				position: absolute;
+				top: 0.1rem;
+				width: 1.15rem;
+				height: 1.1rem;
+			}
+			.lottery .point_700{
+				top: 2.325rem;
+				left: 0.14rem;
+				position: absolute;
+				width: 1.15rem;
+				height: 1.1rem;
+			}
+			.lottery .point_2400{
+				top: 2.325rem;
+				left: 1.95rem;
+				position: absolute;
+				width: 1.15rem;
+				height: 1.1rem;
+			}
+			.lottery .point_3600{
+				top: 2.325rem;
+				position: absolute;
+				width: 1.15rem;
+				height: 1.1rem;
+				right:  0.12rem;
+			}
+			.record{
+				display: block;
+				position: absolute;
+				top: 14.4rem;
+				left: 0;
+				right: 0;
+				margin: auto;
+				width: 3rem;
+				height: 0.5rem;
+			}
+
+			.tc{
+				position: fixed;
+				left: 0; right: 0; top: 0; bottom: 0;
+				background-color: rgba(0,0,0,.67);
+				display: none;
+			}
+			.tc .cent{
+				background-image: url(image/kuang.png);
+				background-size: 100% 100%;
+				width: 5.4rem;
+				height: 5.9rem;
+				margin: 2.3rem auto 0;
+				position: relative;
+
+			}
+			.tc .cent .x_img{
+				position: absolute;
+				width: 0.5rem;
+				right: 0.35rem;
+				top: -0.8rem;
+			}
+			.tc .cent .white_bg{
+				background-color: white;
+				position: relative;
+				width: 4.8rem;
+				height: 5.4rem;
+				top: 0.25rem;
+				margin: 0 auto;
+				border-radius: 30px;
+			}
+			.tc .cent .white_bg .text{
+				position: absolute;
+				margin: 0 auto;
+				left: 0; right: 0;
+				width: 4rem;
+				height: 5.4rem;
+				font-size: 0.2rem;
+				text-align: left;
+				line-height: 0.4rem;				
+			}
+			.rule .cent .white_bg .text .p1{
+				text-align: center;
+				font-size: 0.3rem;
+				padding-bottom: 0.2rem;
+				padding-top: 0.3rem;
+			}
+			.get_point_tc .cent .white_bg .text .p2{
+				text-align: center;
+				font-size: 0.35rem;
+				padding-bottom: 0.2rem;
+				padding-top: 0.3rem;				
+			}
+			.bingo .bingo_cent{
+				background-image: url(image/bingo.png);
+				background-size: 100% 100%;
+				margin: 1.1rem auto 0;
+				height: 8rem;
+				width: 4rem;			
+				position: relative;
+			}
+			.bingo .bingo_cent img{
+				width: 100%;
+			}
+			.bingo .bingo_cent .prize{
+				position: absolute;
+				width: 5rem;
+				height: 5rem;
+				margin: 2rem auto 0;
+				left: -0.5rem;
+			}
+			.bingo_cent .prize_name{
+				width: 100%;
+				top: 1.65rem;
+				font-size: 0.25rem;
+				position: absolute;
+				text-align: center;
+				color: white;
+			}
+			.bingo .bingo_cent .text{
+				width: 100%;
+				top: 1.1rem;
+				font-size: 0.32rem;
+				position: absolute;
+				text-align: center;
+				color: white;
+			}
+			.bingo .contect_pls{
+				width: 100%;
+				top: 6.3rem;
+				position: absolute;
+				text-align: center;
+				color: white;
+				display: none;
+			}
+			.bingo .bingo_cent .close{
+				width: 2.5rem;
+				height: 0.6rem;
+				position: absolute;
+				top: 7.25rem;
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+			.bingo_record .cent .white_bg .text .p3{
+				text-align: center;
+				font-size: 0.3rem;
+				padding-bottom: 0.2rem;
+				padding-top: 0.3rem;
+			}
+			.bingo_record .p4{
+				margin-top: 0.2rem;
+				text-align: center;
+				width: 100%;
+			}
+			.text .main{
+				width: 100%;
+				overflow: auto;
+				height: 3.5rem;
+				text-align: center;
+			}
+			.main .position{
+				width: 100%;
+			}
+			.bingo_record .left{
+				float: left;
+				width: 20%;
+				height: auto;
+				text-align: center;
+			}			
+			.bingo_record .right{
+				float: right;
+				width: 40%;
+				height: auto;
+				text-align: center;
+			}			
+			.bingo_record .bingo_list{
+				font-size: 0.25rem;
+				line-height: 0.5rem;
+			}
+	        .alert{
+	            position: fixed;
+	            top: 0;
+	            bottom: 0;
+	            left: 0;
+	            right: 0;
+	            background-color: rgba(0,0,0,.6);
+	            display: none;
+	            font-size: 14px;
+	            z-index: 1;
+	        }
+	        .alert_cent{
+	            width: 300px;
+	            background-color: #fff;
+	            margin: 180px auto;
+	            text-align: center;
+	            border-radius: 5px;
+	            padding-top: 35px;
+	        }
+	        .button{
+	            border-top: 1px solid #ccc;
+	        }
+	        .alert_cent span{
+	            display: inline-block;
+	            background-color: #fff;
+	            width:48%;
+	            text-align: center;
+	            color: #999;
+	            line-height: 40px;
+	            font-size: 14px;
+	        }
+	        .alert_cent p{
+	            padding-bottom: 30px;
+	            line-height: 20px;
+	        }
+	        .alert_cent span.button2{
+	            color: #2ec7d7;
+	            border-left: 1px solid #ccc;
+	        }		
+	        .button_set_1,.button_set_2{
+				border: 1px solid #ccc;
+	        }		
+		</style>
+		<style id="dynamic">
+		</style>
+	</head>
+	<body>
+		<div class="main_page" >
+			<div class="view">
+				<img src="image/bg.png" class="main_bg">		
+				<div class="top_left"><!--TOP part-->
+					<div class="div1"> 
+						<img src="image/Xuanfu.png"><br>
+						<div class="point">
+							<span>未登录</span>
+						</div>
+						<div class="Bitmap">
+							<img src="image/Bitmap.png" class="huxi_animation">
+						</div>
+						<div class="get_point" onclick="show_tc_how_get_point();"></div>
+					</div>
+				</div>
+				<div class="rule_img">
+					<img src="image/shuoming.png" onclick="tc_rule();">					
+				</div>				
+				<div class="loop_img">
+					<div class="swiper-container" id="loop-img">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<img src="image/13.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="image/12.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="image/17.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="image/14.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="image/16.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="image/11.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="image/18.png">
+							</div>
+							<div class="swiper-slide">
+								<img src="image/15.png">
+							</div>
+						</div>
+					</div>					
+				</div>
+				<div class="looping_bingo">
+					<div class="div1" id="loop-bingo">
+					</div>
+				</div>
+				<div class="lottery"><!--抽獎-->
+					<div class="point_30" onclick="lottery(30,57)"></div>
+					<div class="point_100" onclick="lottery(300,58)"></div>
+					<div class="point_400" onclick="lottery(1200,59)"></div>
+					<div class="point_700" onclick="lottery(2700,60)"></div>
+					<div class="point_2400" onclick="lottery(3600,61)"></div>
+					<div class="point_3600" onclick="lottery(6000,62)"></div>
+				</div>
+				<div class="record" onclick="record()"></div>				
+			</div>
+			<div class="rule tc">
+				<div class="cent" >
+					<img src="image/cha-2.png" class="x_img" onclick="$('.rule').hide()">
+					<div class="white_bg" style="overflow: auto;">
+						<div class="text" >
+							<p class="p1"><b>游戏规则</b></p>
+							<ol style="margin-left: 0.2rem">
+								<li>抽奖时间为8月2日至8月8日;</li>
+								<li>积分、优惠券奖励将实时发放，券有效期为5天。腾讯游戏、H5游戏不可用;</li>
+								<li>玩家在抽中实物奖品后与官方客服QQ联系进行中奖登记;</li>
+								<li>实物奖励发放将于活动结束后7-14个工作日内联系发放，采购需要时间，请耐心等候;</li>
+								<li>同IP、设备、账号视为同一用户;</li>
+								<li>官方客服QQ号：800819365。</li>	
+							</ol>						
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="get_point_tc tc">
+				<div class="cent">
+					<img src="image/cha-2.png" class="x_img" onclick="$('.get_point_tc').hide()">
+					<div class="white_bg">
+						<div class="text">
+							<p class="p2"><b>如何获取欧气</b></p>
+							<ol style="margin-left: 0.4rem">
+								<li>幸运许愿池许愿获欧气</li>
+								<li>玩游戏、冲榜获欧气</li>
+								<li>活动期间，每消费1元，获得1欧气	</li>
+							</ol>
+						</div>
+					</div>					
+				</div>	
+			</div>
+			<div class="bingo tc">
+				<div class="bingo_cent">
+					<div class="prize">
+						<img class="prize_img">
+					</div>
+					<p class="text">恭喜你抽中</p>
+					<p class="prize_name"></p>
+					<p class="contect_pls">实物奖励需联系客服进行登记</br>客服qq：800819365</p>
+					<div class="close" onclick="$('.bingo').hide(), $('.contect_pls').hide()"></div>
+					
+				</div>			
+			</div>
+			<div class="bingo_record tc">
+				<div class="cent">
+					<img src="image/cha-2.png" class="x_img" onclick="$('.bingo_record').hide()">
+					<div class="white_bg">
+						<div class="text">
+							<p class="p3"><b>我的中奖记录</b></p>
+							<div class="main">
+								<div class="left">
+									<p><b>序号</b></p>
+									<div id="left">
+										
+									</div>
+								</div>
+								<div class="right">
+									<p><b>中奖时间</b></p>
+									<div id="right">
+										
+									</div>
+								</div>
+								<p><b>奖品</b></p>
+								<div id="main">
+									
+								</div>
+							</div>
+							<p class="p4">官方客服QQ号：800819365</p>
+						</div>						
+					</div>
+				</div>
+			</div>			
+		</div>
+		<div class="alert">
+			<div class="alert_cent">
+				<p class="alert_text"></p>
+				<div class="button_set_1">
+					<span class="button1" onclick="cancel_button()">取消</span>
+					<span class="button2" onclick="function_button()">去登录</span>
+				</div>
+				<div class="button_set_2">
+					<span class="button1" onclick="function_button()">如何获取欧气</span>
+					<span class="button2" onclick="cancel_button()">好的</span>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://tg-cdn.52tzgame.com/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src='https://tg-cdn.52tzgame.com/js/Responsive.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+    <script type="text/javascript">
+    	if (window.TTJSBridge) {
+	        var accessToken = window.TTJSBridge.getAccessToken();
+	        var deviceId = window.TTJSBridge.getdeviceID();
+	    } else {
+	        var accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NjQ1NDg0ODAsImp0aSI6InVpZF8xMDcwMzU0MDBfIn0.MqcN8i85nU-wUbmMQkN7hkAIZDUTMdKcsRqdWntTJxY';
+	        //var accessToken = '';
+	        var deviceId = '12';
+	    }
+
+    	var ouqi = 0;
+    	var bingo_data = new Array();
+    	var bingo_record= new Array();
+    	var bingo_prize_prizeId;
+    	var bingo_prize_name="";
+    	var bingo_prize_type="";
+    	var image_data = [	
+    	{"name":"华为蓝牙耳机",code:['244','237','',''],content:"image/03.png"},
+    	{"name":"MacBook",code:['250','255','',''],content:"image/02.png"},
+    	{"name":"华为P20",code:['249','242','235','227'],content:"image/07.png"},
+    	{"name":"王者AI机器人",code:['243','236','',''],content:"image/04.png"},
+    	{"name":"小米手环",code:['234','226','',''],content:"image/06.png"},
+    	{"name":"小米充电宝",code:['233','225','',''],content:"image/01.png"},
+    	{"name":"SCORE",content:"image/05.png"},
+    	{"name":"VOUCHER",content:"image/08.png"}
+    	];
+    	
+		var testing = 1;
+   		if (testing) {
+   			var path = 'http://106.75.106.177:8006/tzapp_activity';
+   		}else{
+   			var path = 'https://sdk.ttwanjia.com/activity';
+   		}
+   		// if (accessToken){
+			get_user_info();
+   		// }
+
+   			// initial_rolling_list();
+   		
+
+/*   		function go_temp_login(){
+			$.ajax({
+				url: 'https://api.52hwgame.com/user/token',
+				type: 'POST',
+				data: {
+					phone: '15992088621',
+					// userName : 'tz555',
+					password : 'e10adc3949ba59abbe56e057f20f883e',
+					// password : '5b1b68a9abf4d2cd155c81a9225fd158',
+					// grantType : 'userName'
+					grantType : 'phone'
+				}
+			})
+  		}*/
+
+  		// initial rolling list
+  		// function initial_rolling_list(){
+    // 		$.ajax({
+				// url : path+'/ouqi-lottery/home',
+				// type : 'POST',
+				// data:{
+				// 	accessToken : accessToken,
+				// 	activityId : 18,
+				// 	deviceId : deviceId,
+				// },
+				// success:function(res){
+				// 	bingo_data = res.rollingList;								
+				// }
+    // 		}).done(function(){
+    // 			initial_rolling(bingo_data)
+    // 		})
+    // 	}
+
+    	function initial_rolling(array){
+    		$('.looping_bingo .div1').empty();
+    		if(array.length == 0){
+    			$('.looping_bingo .div1').append("<p>快来抽Macbook和华为P30</p>");
+    			adjust_rolling(array);
+    			return;
+    		}
+    		for (var i = 0; i < array.length; i++) {
+    			$('.looping_bingo .div1').append("<p>"+array[i]+"</p>");
+    		}
+    		$('.looping_bingo .div1').append("<p>"+array[0]+"</p>");
+    		adjust_rolling(array);
+
+    	}
+    	function adjust_rolling(array){ //调动画高度
+     		var height = 0.4*(array.length);
+    		var time = 1*(array.length+1);   			
+    		$('#dynamic').empty().append('@keyframes word{100%{transform: translateY(-'+height+'rem);}}');
+    		$('#loop-bingo').css("animation-duration",time+'s');
+    	}
+    	// initial rolling list end
+
+    	//Login part
+/*    	function go_login(){
+    		if (!accessToken){
+    			$('#login').html('未登录');
+    			return;
+    		}
+    		get_user_info()
+    	}*/
+    	function get_user_info(){
+    		$.ajax({
+				url : path+'/ouqi-lottery/home',
+				type : 'POST',
+				data:{
+					accessToken : accessToken,
+					activityId : 18,
+					deviceId : deviceId,
+				},
+				success:function(res){
+					if(res.code==0){
+						ouqi = res.ouqi;
+						bingo_record = res.userReward;
+			    		$('.div1 .point').empty().append('<p>我有:</p>');
+			    		$('.div1 .point').append('<p>'+ouqi+'欧气</p>');
+			    		record_text(res.userReward);
+			    		initial_rolling(res.rollingList);
+					}else if(res.code==201){
+						initial_rolling(res.rollingList);
+					}else{
+						showalert(res.msg,"error");
+					}
+					
+				}
+			})
+    	}
+    	// Login part end
+
+		//抽奖
+    	function lottery(value,rule){
+    		if(!accessToken){
+    			showalert("登录后来参与精彩的活动吧！",'login');
+    			return;
+    		}
+    		if (ouqi<value){
+    			showalert('欧气不足，快去其他会场搜集欧气吧！','ouqi');
+    			return;
+    		}
+    		$.ajax({
+    			url : path + '/ouqi-lottery/startGame',
+    			type:"POST",
+    			data:{
+    				accessToken : accessToken,
+    				ruleId : rule,
+    				deviceId : deviceId,
+    			},
+    			success:function(res){
+    				if(res.code==0){
+    					prize_Id = res.data[0].prizeId;
+			    		prize_type = res.data[0].prizeType;
+			    		prize_name = res.data[0].prizeText;
+			    		bingo_tc(prize_Id,prize_type,prize_name);
+	    				get_user_info();
+    				}else{
+						showalert(res.msg,"error");
+    				}	    		
+    			}
+    		})
+    	}
+    	function bingo_tc(prizeId,type,name){	//中奖记录-弹窗
+    		var url ='';
+    		if (type == 'VOUCHER'){
+    			url = image_data[7].content;
+    		}else if(type == 'SCORE'){
+    			url = image_data[6].content;
+    		}else{
+	    		for (var i = 0; i<image_data.length-2; i++){
+	    			for (var z = 0; z < image_data[i].code.length; z++) {
+		    			if (prizeId == image_data[i].code[z] ){
+		    				url = image_data[i].content;
+		    			}	    				
+	    			}
+	    		}
+    		}
+
+    		$('.prize_name').html(name);
+    		$('.prize_img').attr("src",url);
+    		if ( type == 'OTHER'){
+    			$('.contect_pls').show();
+    		}
+    		$('.bingo').show();
+    		//add_record(value);
+    	}
+    	function update_ouqi(){
+    		$('.div1 .point').empty().append('<p>我有:</p>');
+    		$('.div1 .point').append('<p>'+ouqi+'欧气</p>');   			
+   		}
+		//抽奖 end
+
+		//中奖记录
+    	function record_text(arr){
+    		var date;
+    		var count =1;
+    		$('#main').empty();
+    		$('#left').empty();
+    		$('#right').empty();
+    		for (var i = 0; i < arr.length; i++) {
+	    		$('#main').append('<p>'+arr[i].rewardVal+'</p>');
+	    		$('#left').append('<p>'+count+'</p>');		
+	    		date = new Date(arr[i].ctime);
+	    		var time = get_date(date);
+	    		$('#right').append('<p class="position">'+time+'</p>'); 
+	    		count++;   			
+    		}
+    	}
+    	function get_date(date){
+	    	var month = date.getMonth()+1;
+			var strdate = date.getDate();
+		    if (month >= 1 && month <= 9) {
+		        month = "0" + month;
+		    }
+		    if (strdate >= 0 && strdate <= 9) {
+		        strdate = "0" + strdate;
+		    }
+		    var currentdate = month.toString() + strdate.toString()+ "-" + date.getHours() + ':' + date.getMinutes();
+		    return currentdate		        		
+    	}
+    	// 中奖记录 end
+
+    	function showalert(text,fn){
+    		$('.button_set_2 .button2').css("border-left","1px solid #ccc;")
+    		if (fn == 'ouqi'){
+				$('.button_set_1').hide();
+				$('.button_set_2').show();		
+    		}else if(fn == 'login'){
+ 				$('.button_set_1').show();
+				$('.button_set_2').hide();   			
+    		}else if(fn == 'error'){
+    			$('.button_set_1').hide();
+				$('.button_set_2').show();   
+				$('.button_set_2 .button1').hide();   
+				$('.button_set_2 .button2').css("border","0")
+    		}
+    		$('.alert').show();
+    		$('.alert_text').html(text);
+    		window.function_button = function(){
+    			$('.alert').hide();
+    			if(fn == 'login'){
+    				link_to_login();
+    			}else if(fn == 'ouqi'){
+    				show_tc_how_get_point();
+    			}
+    		}
+    	};
+    	window.cancel_button = function(){
+    		$('.alert').hide();
+    	};	
+
+
+    	function show_tc_how_get_point(){ //如何获取欧气-弹窗
+    		$('.get_point_tc').show();
+    	}
+    	function tc_rule(){		//活动说明-弹窗
+    		$('.rule').show();
+    	}
+    	function record(){	// 我的中奖记录-弹窗
+    		if (!accessToken) {
+    			showalert('登录后来参与精彩的活动吧！','login');
+    			return;
+    		}    		
+    		$('.bingo_record').show();
+    	}
+    	function link_to_login(){
+    		window.location.href="tzsybm://nav/mine/login?backToLastActivity=0";
+    	}
+
+    	var loop1 = new Swiper('#loop-img',{
+    		direction:'horizontal',
+    		loop:true,
+			slidesPerView :3,
+			autoplay:{
+				disableOnInteraction:false,
+				delay:2000,
+			}
+    	})
+    </script>
+</html>
